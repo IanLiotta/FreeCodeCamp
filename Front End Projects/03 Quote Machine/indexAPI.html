@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Random Quote Machine</title>
+    <script src="https://use.fontawesome.com/71cec842b4.js"></script>
+    <!-- <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="quoteBox"> <br><h1>Random Quote Machine</h1><br> </div> <br><br><br>
+    <div class="row">
+    <div class="col-md-3"></div>
+    <div class="quoteBox col-md-6 container">
+        <blockquote class="blockquote lead"><span id="randQuote">Replace this text with jQuery</span>
+            <footer id="randAuthor" class="blockquote-footer">Replace this text with jQuery too</footer>
+        </blockquote>
+        <div id="buttons" class="row">
+            <div class="col-md-6">
+                <a id="quoteBtn" class="btn">
+                <i class="fa fa-comment fa-3x pull-left"></i> <span class='label'>New Quote</span>
+                </a>
+            </div>
+            
+            <div id="twitDiv" class="col-md-6">
+                <a id="twitBtn" class="twitter-share-button btn pull-right" href="https://twitter.com/intent/tweet?text=">
+                <i class="fa fa-twitter fa-3x pull-left"></i> <span class='label'>Tweet Quote</span>
+                </a>
+            </div>
+            
+<style>
+    body{
+        transition: background 1s;
+    }
+    .quote{
+        font-size: 400%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .author{
+        font-size: 300%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-style:italic;
+        text-align: right;
+    }
+    .quoteBox{
+        box-shadow: 0px 8px 20px rgba(0,0,0,0.5);
+        background: beige;
+        padding: 4px;
+    }
+    h1{
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .label{
+        display: table-cell;
+        vertical-align: middle;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: black;
+        text-shadow: 0px 0px black !important;
+        font-size: 16pt;
+    }
+    #buttons{
+       height: 50px;
+    }
+    #twitBtn{
+        display: table;
+        transition: color 1s;
+        text-shadow: 0px 2px 4px black;
+    }
+    #twitBtn:hover{
+        color: blue;
+    }
+    #quoteBtn{
+        display: table;
+        transition: color 1s;
+        text-shadow: 0px 2px 4px black;
+        padding-right: 20px;
+        font-weight: bold;
+        
+    }
+    #quoteBtn:hover{
+        color: red;
+    }
+   
+</style>
+        </div>
+    </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script>
+        $(function(){
+
+            function changeBg(){
+                var bgColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                $("body").css("background", bgColor);
+                $("#twitBtn").css("color", bgColor);
+                $("#quoteBtn").css("color", bgColor);
+            };
+
+            function pullQuote(){
+                $.ajax({
+                    url: "https://cors-anywhere.herokuapp.com/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
+                    success: function(a) {
+                        $("#randQuote").html(a[0].content);
+                        $("#randAuthor").text(a[0].title);
+                        var plainText = $("#randQuote").text();
+                        $(".twitter-share-button").prop("href", "https://twitter.com/intent/tweet?text=\"" + plainText + "\" " + a[0].title);
+                    },
+                cache: false
+                });
+            };
+
+                   
+            //rollQuote();
+            pullQuote();
+            changeBg();
+
+            $("#quoteBtn").on("click", function() {
+                pullQuote();
+                changeBg();    
+            });
+
+        });
+            
+    </script>
+    
+</body>
+
+</html>

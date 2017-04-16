@@ -1,0 +1,43 @@
+var output = document.getElementById("weatherBox");
+var lat = '';
+var lon = '';
+var weather = new XMLHttpRequest();
+var loc = new XMLHttpRequest();
+var reqUrl = '';
+
+function processLoc(e){
+    if (loc.readyState == 4 && loc.status == 200) {
+        var response = JSON.parse(loc.responseText);
+        //output.innerHTML = response.loc;
+        reqUrl = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/ac852327dd208f1010bbcb2759d6497d/" + response.loc;
+        console.log(reqUrl);
+    }
+}
+  
+function processWeather(e){
+    if (weather.readyState == 4 && weather.status == 200){
+      console.log(weather.responseText);
+      //var response = JSON.parse(weather.responseText);
+      //output.innerHTML = response.currently.summary + "<br>" + response.currently.icon + "<br>" + response.currently.temperature;
+    }
+}
+
+function getLoc() {
+    
+    loc.open("GET", "http://ipinfo.io/json", true);
+    loc.send();
+    loc.addEventListener("readystatechange", processLoc, false);
+}
+
+function getWeather() {
+    weather.open("GET", reqUrl, true);
+    //weather.open("GET", "http://ipinfo.io/json", true);
+    //weather.open("GET", "https://api.darksky.net/forecast/ac852327dd208f1010bbcb2759d6497d/" + lat + "," + lon, true);
+    weather.send();
+    weather.addEventListener("readystatechange", processWeather, false);
+    //output.innerHTML = "Latitude: " + lat + "<br>Longitude: " + lon;
+    //output.innerHTML = "responseText: " + weather.responseText;
+}
+  
+getLoc();
+getWeather();

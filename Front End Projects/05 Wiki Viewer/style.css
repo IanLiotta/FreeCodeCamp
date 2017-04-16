@@ -1,0 +1,37 @@
+body{
+    background: #00221C;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+a:link, a:visited {
+    background-color: #00493d;
+    color: white;
+    padding: 20px 10px;
+    margin: 20px 5px;
+    text-decoration: none;
+    text-align: left;
+    display: inline-block;
+    border-bottom: 5px;
+    border-bottom-color: #006b59; 
+    border-bottom-style: solid;
+    width: 90%
+}
+
+a:hover, a:active {
+    background-color: #006b59;
+}
+
+input{
+    width: 50%;
+    font-size: 105%;
+    padding: 1em 1em;
+}
+
+input[type=button]{
+    background-color: #006b59;
+    color: white;
+    border:none;
+    cursor: pointer;
+}

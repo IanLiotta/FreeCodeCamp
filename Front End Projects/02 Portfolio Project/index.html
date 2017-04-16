@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap Starter Template</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<style>
+    body{
+        background: url(pexels-photo-257930.jpeg);
+    }
+    .header{
+        background-color: #01526d;
+        color: azure;
+        font-family: monospace;
+        padding-bottom: 20px;
+    }
+    .headshot{
+        float: right;
+    }
+    .parent {
+        display: table;
+        table-layout: fixed;
+        margin: auto;
+        padding: 20px 0px 20px 0px;
+    }
+
+    .child {
+        height: inherit;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
+    }
+    .child-2{
+        display:table-cell;
+        vertical-align:bottom;
+        text-align:bottom;
+    }
+    .bg-1{
+        background-image: url(pexels-photo-257930.jpeg);
+        /*background-position: 50% 0%;*/
+        margin-top: 0px;
+        padding: 20px 20px 20px 20px;    
+    }
+    .bg-2{
+        padding: 10px 10px 10px 10px;
+    }
+    .bg-3{
+        background-color: #01526d;
+        color:azure;
+        font-family: monospace;
+        font-size: xx-large;
+        padding: 20px 20px 20px 20px;
+    }
+    h1{
+        font-size: 400%;
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .prj-label{
+        background-color: #01526D;
+        color:azure;
+        text-align: center;
+    }
+    img{
+        object-fit: cover;
+    }
+    .prj-placeholder{
+        height: 400px;
+        width: auto;
+        background-image: linear-gradient(to bottom right, #acdde3, #4d6471);
+    }
+</style>
+    
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#top">Ian's Folio</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="header">
+        <br><br><br>
+        <h1>Ian Liotta's Portfolio</h1>
+        <h1><p class="lead">Traditional art, computer graphics, and FreeCodeCamp projects.<p></h1>
+    </div>
+    
+    <div class="container">
+        <div class="row parent" id="about">
+            <div class="child prj-label">
+                <h2>This site is currently a placeholder but over the coming year will become a catalog of my self-improvement as an artist and my progress through FreeCodeCamp.</h2>
+            </div>
+            <div class="headshot">
+                    <img src="Momo%20Snow%202017.jpg" class="img-responsive img-rounded" alt="Momo in snow">
+            </div>
+        </div>
+        <div class="container-fluid row" id="projects">
+            <div class="container-fluid">
+                <div class="container-fluid row">
+                    <div class="col-sm-4">
+                        <img src="CastDrawing_Grayscale_Levels.jpg" class="img-responsive">
+                        <p class="lead prj-label">Traditional Art</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="render3.png" class="img-responsive">
+                        <p class="lead prj-label">3D Modeling</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="prj-placeholder"></div>
+                        <p class="lead prj-label">Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid bg-3 text-right" id="contact">
+        <div>
+            <b>Contact Us: </b>
+            <a href="http://twitter.com/iiiifriend/" target="_blank"><span class="fa fa-twitter"></a> </span>
+            <a href="mailto:placeholder@nospam.com" target="_blank"><span class="fa fa-envelope"></span></a>
+        </div>
+    </div>
+    
+    <!-- /.container -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+
+</html>

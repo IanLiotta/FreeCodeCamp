@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FCC Twitch Status</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+
+    <style>
+        body{
+            background: #4b396c;
+        }
+        #resultDiv{            
+            width: 95%;
+            margin: auto;
+            background: #624a8c;
+        }
+        .streamDiv{
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            background: white;
+            min-height: 320px;
+            width: 300px;
+            padding: 20px;
+            margin: 20px;
+        }
+    </style>
+
+    <body>
+        <div id="resultDiv"></div>
+    </body>
+    
+    <script>
+        var result = "";    
+        var FCCPassThru = 'https://wind-bow.glitch.me/Twitch-API/';
+        var userArr = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
+        let userName = '';
+        
+
+        function getUserInfo(){
+            return new Promise((resolve, reject) => {
+                let streamInfo = {
+                    name: '',
+                    game: '',
+                    logo: '',
+                    status: ''
+                }
+            let userJSON = $.getJSON(FCCPassThru + '/users/' + userName)
+            let streamsJSON = $.getJSON(FCCPassThru + '/streams/' + userName)
+            let missingLogo = 'http://static-cdn.jtvnw.net/jtv_user_pictures/test_user1-profile_image-6947308654ad603f-300x300.jpeg'
+
+            $.when(userJSON, streamsJSON).done((userData, streamsData) => {
+                streamInfo.name = userData[0].display_name
+                if(userData[0].logo != null){
+                    streamInfo.logo = userData[0].logo
+                }
+                else
+                {
+                    streamInfo.logo = missingLogo
+                }
+                if(streamsData[0].stream != null){
+                    streamInfo.game = streamsData[0].stream.game
+                    streamInfo.status = streamsData[0].stream.channel.status
+                }
+                else
+                {
+                    streamInfo.game = 'Offline'
+                    streamInfo.status = 'Offline'
+                }
+                if(streamInfo.logo == missingLogo) {streamInfo.status = 'Invalid or Banned User'}
+                console.log(userData)
+                console.log(streamsData)
+                resolve(streamInfo)
+            })
+            userJSON.fail(() =>{
+                console.log('It went wrong')
+            })
+            })
+        }
+
+        $(document).ready(function(){
+
+            $(userArr).each(function(index){
+                userName = this;
+                getUserInfo().then(function(passedVal){
+                    console.log(passedVal);
+                     $("#resultDiv").append(
+                    '<div class="streamDiv">' +
+                    '<a href="http://www.twitch.tv/' + passedVal.name + '" target="_blank">' +
+                    passedVal.name + '<br>' +
+                    '<img src=' + passedVal.logo + '>' +
+                    passedVal.game + '<br>' +
+                    passedVal.status + '</a>' +
+                    '</div>')
+                });
+            });
+        });     
+        
+    </script>
+</html>

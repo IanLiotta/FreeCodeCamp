@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FreeCodeCamp Wiki Viewer</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+
+        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Wiki Page<a>
+        <br>
+        <form action="search()">
+            <input type="text" id="searchBox" placeholder="Search Wikipedia"/>
+            <input type="button" id="searchButton" value="Submit"/>
+        </form>
+
+        <div id="results"></div>
+               
+        <script>
+            $(document).ready(function() {
+                $("#searchButton").click(function() {
+                    search($("#searchBox").val());
+                });
+            });
+            function search(query){
+                console.log(query);
+                $.get("https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + query, function(result, status){
+                    console.log(status);
+                    console.log(result);
+                    result.query.search.forEach(function(n){
+                        $("#results").append('<a href="https://en.wikipedia.org/wiki/' + n.title + '" target="_blank">' + n.snippet + '<br></a');
+                    });
+                        
+                });
+            }
+        </script>
+    </body>
+</html>

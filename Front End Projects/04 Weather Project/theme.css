@@ -1,0 +1,33 @@
+    body{
+        background: lightslategray;
+        text-align: center;
+        font-family: sans-serif;
+    }
+    .flex-container{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .flex-box{
+        background: darkorange;
+        flex: 0 0 25%;
+        align-self: center;
+    }
+    .flex-box-right{
+        background: orange;
+        flex: 0 0 33%;
+    }
+    #iconCanvas{
+        padding: 10px;
+    }
+    @media (min-width: 1em) {
+        .flex-container{
+            flex-direction: column;
+        }
+    }
+    @media (min-width: 48em) {
+        .flex-container{
+            flex-direction: row;
+        }
+    }

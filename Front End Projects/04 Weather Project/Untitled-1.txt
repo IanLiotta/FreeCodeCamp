@@ -1,0 +1,39 @@
+var output = document.getElementById("weatherBox");
+var weather = new XMLHttpRequest();
+var reqURL = '';
+
+var pGetLoc = new Promise(function(resolve, reject){
+  navigator.geolocation.getCurrentPosition(function(pos) {
+      reqURL = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/ac852327dd208f1010bbcb2759d6497d/" + pos.coords.latitude + ','+ pos.coords.longitude;
+      if (reqURL !== ''){
+        console.log(reqURL);
+        resolve(reqURL);
+      }
+      else
+      {
+        reject(Error("Failed to get location."));
+      }
+    });
+});
+
+function getLoc() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+              reqURL = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/ac852327dd208f1010bbcb2759d6497d/" + pos.coords.latitude + ','+ pos.coords.longitude;
+          console.log(reqURL);
+         });
+        }
+    else {
+        output.innerHTML = "navigator.geolocation returned false";
+    }
+}
+
+
+function outputWeather() {
+  $.get(reqURL, function(response){
+  console.log(response.currently.summary);
+  });
+}
+
+
+pGetLoc.then(outputWeather());

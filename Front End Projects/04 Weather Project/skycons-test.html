@@ -1,0 +1,18 @@
+<html>
+<body>
+    <script src=skycons.js></script>
+    <canvas id="iconTest" width="512" height="512"></canvas>
+    <script>
+        var c = document.getElementById("iconTest");
+        var ctx = c.getContext("2d");
+        ctx.moveTo(0,0);
+        ctx.lineTo(200,100);
+        ctx.stroke();
+    </script>
+    <script>
+        var skycons = new Skycons({"color": "blue"});
+        skycons.add("iconTest", Skycons.RAIN);
+        skycons.play();
+    </script>
+</body>
+</html>

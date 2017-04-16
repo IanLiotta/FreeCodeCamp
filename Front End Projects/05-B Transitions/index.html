@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CSS Transition Test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <style>
+            body{
+                text-align: center;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+
+           input[type=text]{
+                width: 40px;
+                transition: width 2s, border-radius 2s;
+                border-radius: 10px;
+           }
+
+           .tabCtn{
+               background: beige;
+               width: 75%;
+               height: 200px;
+               
+           }
+
+           .aniTab{
+               background: cornflowerblue;
+               display: flex;
+               text-align: center;
+               width: 40px;
+               height: 40px;
+               margin: 5px 0px 5px auto;
+               transition: .5s ease-in-out;
+               line-height: 2em;
+           }
+
+           .tabText{
+                display: none;
+                margin-left: auto;
+           }
+
+           #tabIcon1{
+                display:block;
+                background: red;
+                width: 30px;
+                height: 30px;
+                border: solid 2px black;
+                border-radius: 50%;
+                margin: auto 2px;
+           }
+
+        </style>
+
+        <div>
+            <form>
+                <input type="text" name="testForm" id="resizeMe">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <br>
+        <div class="tabCtn">
+            <p>tab container</p>
+                    <div class="aniTab" id="tab1" onmouseenter="expand('tab1', 'tabText1')" onmouseleave="contract('tab1', 'tabText1')">
+                        <span id="tabIcon1">1</span>
+                        <span class="tabText" id="tabText1">Tab Text</span>
+                    </div>
+                    <div class="aniTab" id="tab2" onmouseenter="expand('tab2', 'tabText2')" onmouseleave="contract('tab2', 'tabText2')">
+                        <span>2</span>
+                        <span class="tabText" id="tabText2">Tab Text</span>
+                    </div>
+                    <div class="aniTab" id="tab3" onmouseenter="expand('tab3', 'tabText3')" onmouseleave="contract('tab3', 'tabText3')">
+                        <span>3</span>
+                        <span class="tabText" id="tabText3">Tab Text</span>
+                    </div>
+        </div>
+
+        <script>
+            document.getElementById("resizeMe").onclick = function(){
+                this.style.width = "200px";
+                this.style.borderRadius = "2px";
+           };
+
+           function expand(a, b){
+               document.getElementById(a).style.width = "200px";
+               setTimeout(function(){
+                    if( document.getElementById(a).style.width == "200px"){
+                        document.getElementById(b).style.display = "initial";}
+               }, 500);
+           }
+
+           function contract(a, b){
+               document.getElementById(a).style.width = "40px";
+               document.getElementById(b).style.display = "none";
+           }
+        </script>
+    </body>
+</html>
