@@ -6,14 +6,12 @@ function whatIsInAName(collection, source) {
   console.log(srcProp)
 
   collection.forEach((val) => {
-    
-    if (val.hasOwnProperty(srcProp)){
-     
-      if (val[srcProp] == source[srcProp]) {
+    let valProp = Object.keys(val);
+    console.log(valProp);
+
+    if (arrContains(srcProp, valProp)){
         arr.push(val);
       }
-      
-    }
     
   })
 
@@ -33,8 +31,8 @@ function arrContains(a, b) {
   return false;
 }
 //whatIsInAName([1, 2, 3, 4], [3]);
-//whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 //whatIsInAName([{ "a": 1 }, { "a": 1 }, { "a": 1, "b": 2 }], { "a": 1 })
-//whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "b": 2 })
+whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "b": 2 })
 
-console.log(arrContains(['1'], ['1']))
+//console.log(arrContains(['1'], ['1']))
