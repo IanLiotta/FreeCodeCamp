@@ -2,34 +2,34 @@ function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
-  let srcProp = Object.keys(source);
-  console.log(srcProp)
 
-  collection.forEach((val) => {
-    let valProp = Object.keys(val);
-    console.log(valProp);
-
-    if (arrContains(srcProp, valProp)){
-        arr.push(val);
+  //if collection hasOwnProp matching source, push that prop into an array of strings
+  collection.forEach(function compareKeys(colObj) {
+    console.log(colObj)
+    let results = 0;
+    for(let srcName in source) {
+      console.log(srcName,source[srcName])
+      console.log(colObj.hasOwnProperty(srcName));
+      if(colObj.hasOwnProperty(srcName)) {
+        if(colObj[srcName] === source[srcName]){
+          results++;
+        }
       }
-    
-  })
+    }
+    console.log(results,Object.keys(source).length)
+    if(results === Object.keys(source).length){
+      arr.push(colObj);
+    }
+  });
+
+  
 
   console.log(arr)
   // Only change code above this line
   return arr;
 }
 
-function arrContains(a, b) {
-  let result = 0;
-  a.forEach((valA) => {
-    b.forEach((valB) => {
-      if (valA === valB) {result++};
-    });
-  });
-  if (result === a.length) {return true}
-  return false;
-}
+
 //whatIsInAName([1, 2, 3, 4], [3]);
 whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 //whatIsInAName([{ "a": 1 }, { "a": 1 }, { "a": 1, "b": 2 }], { "a": 1 })
