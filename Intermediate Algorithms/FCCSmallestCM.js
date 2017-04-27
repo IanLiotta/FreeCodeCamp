@@ -1,7 +1,7 @@
 function smallestCommons(arr) {
     let solution = 0;
     let i = 1;
-
+    let currentTest = 1;
     //make sure arr[1] is larger
     if(arr[0] > arr [1]) {
         let temp = arr[0];
@@ -13,10 +13,10 @@ function smallestCommons(arr) {
         let tempMult = arr[1] * i;
         
         // test smaller multiples until they match or exceed the current largest multiple
-        for(let j = arr[0]; j*arr[0] <= tempMult; j++) {
-            if(j*arr[0] === tempMult) {
+        for(currentTest = i; currentTest*arr[0] <= tempMult; currentTest++) {
+            if(currentTest*arr[0] === tempMult) {
                 solution = tempMult;
-                console.log('Solution? ', solution);
+                // console.log('Solution? ', solution);
             }
         }
 
@@ -34,9 +34,4 @@ function smallestCommons(arr) {
     return solution;
 }
 
-function isDivisible(a, b) {
-    if (a % b === 0) {return true;}
-    return false;
-}
-
-console.log(smallestCommons([23,18]));
+console.log(smallestCommons([1,13]));
