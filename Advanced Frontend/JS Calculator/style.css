@@ -1,0 +1,36 @@
+body {
+    background: darkgray;
+    text-align: center;
+}
+
+.calcContainer {
+    margin: auto;
+    padding: 1em;
+    background: slategray;
+    height: 500px;
+    width: 400px;
+    border-radius: 5%;
+}
+
+.outputDisplay {
+    margin: 1em;
+    width: 90%;
+    height: 2em;
+    background: wheat;
+}
+
+.smallButton {
+    display: inline-block;
+    margin: 1em;
+    background: darkslategray;
+    width: 2em;
+    height: 2em;
+}
+
+.wideButton {
+    display: inline-block;
+    margin: 1em;
+    background: darkslategray;
+    width: 6em;
+    height: 2em;
+}
