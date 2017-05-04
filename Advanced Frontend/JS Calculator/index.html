@@ -10,24 +10,88 @@
     <br/>
     <div class="calcContainer">
 
-        <div class="outputDisplay"></div>
+        <div class="outputDisplay" id="history"></div>
+        <div class="outputDisplay" id="output"></div>
 
-        <div class="smallButton" id="one">1</div>
-        <div class="smallButton">2</div>
-        <div class="smallButton">3</div>        
-        <div class="smallButton">4</div>
-        <div class="smallButton">5</div>
-        <div class="smallButton">6</div>
-        <div class="smallButton">7</div>
-        <div class="smallButton">8</div>
-        <div class="smallButton">9</div>
-        <div class="smallButton" id="multiply">X</div>
-        <div class="wideButton" id="equals">=</div>
+        <button class="smallButton" id="AC" onclick="allClear()">AC</button>
+        <button class="smallButton" id="one" onclick="pushNum(1)">1</button>
+        <button class="smallButton" onclick="pushNum(2)">2</button>
+        <button class="smallButton">3</button>        
+        <button class="smallButton">4</button>
+        <button class="smallButton">5</button>
+        <button class="smallButton">6</button>
+        <button class="smallButton">7</button>
+        <button class="smallButton">8</button>
+        <button class="smallButton">9</button>
+        <button class="smallButton" id="multiply" onclick="pushOp('*')">X</button>
+        <button class="smallButton" id="multiply" onclick="pushOp('+')">+</button>
+
+        <button class="wideButton" id="equals" onclick="equals()">=</button>
 
     </div>
 
     <script>
+    let result = undefined,
+        currentNumber = '',
+        currentOperation = '',
+        lastNumber = '',
+        stack = [];
 
+        updateDisplay(0);
+
+    function pushNum(newNumber) {
+        currentNumber = "" + currentNumber + newNumber;
+        updateDisplay(currentNumber);
+    }
+
+    function pushOp(operation) {
+        currentOperation = operation;
+        if(lastNumber === '') {
+            lastNumber = currentNumber;
+            result = currentNumber;
+            currentNumber = '';
+        }
+        else {
+            doMath(operation);
+        }
+    }
+
+    function doMath(operation) {
+        if(currentNumber === '') {currentNumber = lastNumber;}
+        switch(operation) {
+            case '*':
+                result = result * parseInt(currentNumber);
+                break;
+            case '+':
+                result = parseInt(result) + parseInt(currentNumber);
+                break;
+            default:
+                result = 0;
+        }
+        updateDisplay(result);
+        currentNumber = '';
+    }
+
+    function equals() {
+        if(lastNumber !== ''){
+            doMath(currentOperation);
+        }
+        lastNumber = '';
+        currentNumber = result;
+    }
+
+    function updateDisplay(result) {
+        document.getElementById("output").innerText = result;
+        document.getElementById("history").innerText = lastNumber;
+    }
+
+    function allClear() {
+        currentNumber = '';
+        lastNumber = '';
+        currentOperation = '';
+        result = undefined;
+        updateDisplay(0);
+    }
     </script>
 
 </body>
