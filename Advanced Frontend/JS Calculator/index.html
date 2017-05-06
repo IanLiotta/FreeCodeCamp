@@ -31,7 +31,7 @@
         <button class="calcButton" onclick="pushNum(1)">1</button>
         <button class="calcButton" onclick="pushNum(2)">2</button>
         <button class="calcButton" onclick="pushNum(3)">3</button>        
-        <button class="calcButton tallButton" id="equals" onclick="equals()">=</button>
+        <button class="calcButton tallButton" onclick="equals()">=</button>
 
         <button class="calcButton wideButton" onclick="pushNum(0)">0</button>
         <button class="calcButton" onclick="pushNum('.')">.</button>
@@ -41,78 +41,76 @@
 
     <script>
     let result = undefined,
-        currentNumber = '',
-        currentOperation = '',
-        lastNumber = '';
+        currentNumber = '';
     let stack = [];
 
         updateDisplay('');
 
     function pushNum(newNumber) {
         currentNumber = "" + currentNumber + newNumber;
-        stack.push(newNumber);
         updateDisplay(currentNumber);
     }
 
     function pushOp(operation) {
+        if(currentNumber !== '') {stack.push(currentNumber);}        
         stack.push(operation);
+        currentNumber = '';
         updateDisplay(operation);
-        currentOperation = operation;
-        if(lastNumber === '') {
-            lastNumber = currentNumber;
-            result = currentNumber;
-            currentNumber = '';
-        }
-        else {
-            doMath(operation);
-            stack.push(operation);
-        }
     }
 
-    function doMath(operation) {
-        if(currentNumber === '') {
-            // currentNumber = lastNumber;
+    function equals() {
+        if(currentNumber !== '') {stack.push(currentNumber);}        
+        stack.push('=');
+        evalStack(stack);
+        
+    }
+
+    function doMath(operation, number) {
+        if(number === '') {
             updateDisplay('Error');
             return 0;
         }
         switch(operation) {
             case 'x':
-                result = parseFloat(result) * parseFloat(currentNumber);
+                result = parseFloat(result) * parseFloat(number);
                 break;
             case '+':
-                result = parseFloat(result) + parseFloat(currentNumber);
+                result = parseFloat(result) + parseFloat(number);
                 break;
             case '-':
-                result = parseFloat(result) - parseFloat(currentNumber);
+                result = parseFloat(result) - parseFloat(number);
                 break;
             case '/':
-                result = parseFloat(result) / parseFloat(currentNumber);
+                result = parseFloat(result) / parseFloat(number);
                 break;
             default:
-                result = 0;
+                return '';
+                break;
         }
-        stack.push(result);
-        updateDisplay(result);
-        currentNumber = '';
+        return result;
     }
 
-    function equals() {
-        if(lastNumber !== ''){
-            stack.push('=');
-            doMath(currentOperation);
+    function evalStack(stack) { 
+        result = stack[0];      
+        for (let val in stack) {
+            let i = parseInt(val)+1;
+            if(!Number(stack[val]) && Number(stack[i])) {
+                result = doMath(stack[val], parseFloat(stack[i]));
+            }
         }
-        lastNumber = '';
-        currentNumber = result;
-        
+        stack.length = 0;
+        currentNumber = '';
+        stack.push(result);
+        updateDisplay(result);
     }
 
     function updateDisplay(result) {
-        document.getElementById("history").innerHTML = stack.join('');
+        document.getElementById("history").innerHTML = stack.join(' ');
         document.getElementById("output").innerHTML = result;
     }
 
     function allClear() {
-        stack = [];
+        stack.length = 0;
         currentNumber = '';
         lastNumber = '';
         currentOperation = '';
@@ -122,7 +120,7 @@
 
     function clearEntry() {
         currentNumber = '';
-        document.getElementById("output").innerHTML = '';
+        updateDisplay('');
     }
     </script>
 

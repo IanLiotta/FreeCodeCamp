@@ -7,7 +7,7 @@ body {
     margin: auto;
     padding: 1em;
     background: slategray;
-    height: 500px;
+    height: 450px;
     width: 300px;
     border-radius: 5%;
     box-shadow: -5px -5px 20px #485360 inset, 0 0 20px #263246;
@@ -15,10 +15,12 @@ body {
 }
 
 .outputDisplay {
-    margin: 1em;
-    width: 90%;
+    position: relative;
+    margin: .5em auto;
+    width: 85%;
     height: 2em;
     background: wheat;
+    border: 4px inset;
 }
 
 .calcButton {
