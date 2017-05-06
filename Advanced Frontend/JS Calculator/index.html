@@ -44,15 +44,19 @@
         currentNumber = '',
         currentOperation = '',
         lastNumber = '';
+    let stack = [];
 
         updateDisplay('');
 
     function pushNum(newNumber) {
         currentNumber = "" + currentNumber + newNumber;
+        stack.push(newNumber);
         updateDisplay(currentNumber);
     }
 
     function pushOp(operation) {
+        stack.push(operation);
+        updateDisplay(operation);
         currentOperation = operation;
         if(lastNumber === '') {
             lastNumber = currentNumber;
@@ -61,8 +65,8 @@
         }
         else {
             doMath(operation);
+            stack.push(operation);
         }
-        updateDisplay(operation);
     }
 
     function doMath(operation) {
@@ -87,14 +91,15 @@
             default:
                 result = 0;
         }
+        stack.push(result);
         updateDisplay(result);
         currentNumber = '';
     }
 
     function equals() {
         if(lastNumber !== ''){
+            stack.push('=');
             doMath(currentOperation);
-            document.getElementById("history").innerHTML += '=';
         }
         lastNumber = '';
         currentNumber = result;
@@ -102,18 +107,17 @@
     }
 
     function updateDisplay(result) {
-        document.getElementById("history").innerHTML += result;
+        document.getElementById("history").innerHTML = stack.join('');
         document.getElementById("output").innerHTML = result;
-        //document.getElementById("history").innerHTML = lastNumber;
     }
 
     function allClear() {
+        stack = [];
         currentNumber = '';
         lastNumber = '';
         currentOperation = '';
         result = undefined;
         updateDisplay('');
-        document.getElementById("history").innerHTML = '';
     }
 
     function clearEntry() {
