@@ -13,20 +13,29 @@
         <div class="outputDisplay" id="history"></div>
         <div class="outputDisplay" id="output"></div>
 
-        <button class="smallButton" id="AC" onclick="allClear()">AC</button>
-        <button class="smallButton" id="one" onclick="pushNum(1)">1</button>
-        <button class="smallButton" onclick="pushNum(2)">2</button>
-        <button class="smallButton">3</button>        
-        <button class="smallButton">4</button>
-        <button class="smallButton">5</button>
-        <button class="smallButton">6</button>
-        <button class="smallButton">7</button>
-        <button class="smallButton">8</button>
-        <button class="smallButton">9</button>
-        <button class="smallButton" id="multiply" onclick="pushOp('*')">X</button>
-        <button class="smallButton" id="multiply" onclick="pushOp('+')">+</button>
+        <button class="calcButton" onclick="allClear()">AC</button>
+        <button class="calcButton" onclick="clearEntry()">CE</button>
+        <button class="calcButton" onclick="pushOp('/')">/</button>
+        <button class="calcButton" onclick="pushOp('*')">X</button>
 
-        <button class="wideButton" id="equals" onclick="equals()">=</button>
+        <button class="calcButton" onclick="pushNum(7)">7</button>
+        <button class="calcButton" onclick="pushNum(8)">8</button>
+        <button class="calcButton" onclick="pushNum(9)">9</button>
+        <button class="calcButton" onclick="pushOp('-')">-</button>
+
+        <button class="calcButton" onclick="pushNum(4)">4</button>
+        <button class="calcButton" onclick="pushNum(5)">5</button>
+        <button class="calcButton" onclick="pushNum(6)">6</button>
+        <button class="calcButton" onclick="pushOp('+')">+</button>
+
+        <button class="calcButton" onclick="pushNum(1)">1</button>
+        <button class="calcButton" onclick="pushNum(2)">2</button>
+        <button class="calcButton" onclick="pushNum(3)">3</button>        
+        <button class="calcButton tallButton" id="equals" onclick="equals()">=</button>
+
+        <button class="calcButton wideButton" onclick="pushNum(0)">0</button>
+        <button class="calcButton" onclick="pushNum('.')">.</button>
+
 
     </div>
 
@@ -34,8 +43,7 @@
     let result = undefined,
         currentNumber = '',
         currentOperation = '',
-        lastNumber = '',
-        stack = [];
+        lastNumber = '';
 
         updateDisplay(0);
 
@@ -57,13 +65,23 @@
     }
 
     function doMath(operation) {
-        if(currentNumber === '') {currentNumber = lastNumber;}
+        if(currentNumber === '') {
+            // currentNumber = lastNumber;
+            updateDisplay('Error');
+            return 0;
+        }
         switch(operation) {
             case '*':
-                result = result * parseInt(currentNumber);
+                result = parseFloat(result) * parseFloat(currentNumber);
                 break;
             case '+':
-                result = parseInt(result) + parseInt(currentNumber);
+                result = parseFloat(result) + parseFloat(currentNumber);
+                break;
+            case '-':
+                result = parseFloat(result) - parseFloat(currentNumber);
+                break;
+            case '/':
+                result = parseFloat(result) / parseFloat(currentNumber);
                 break;
             default:
                 result = 0;
@@ -81,8 +99,8 @@
     }
 
     function updateDisplay(result) {
-        document.getElementById("output").innerText = result;
-        document.getElementById("history").innerText = lastNumber;
+        document.getElementById("output").innerHTML = result;
+        document.getElementById("history").innerHTML = lastNumber;
     }
 
     function allClear() {
@@ -90,7 +108,12 @@
         lastNumber = '';
         currentOperation = '';
         result = undefined;
-        updateDisplay(0);
+        updateDisplay('');
+    }
+
+    function clearEntry() {
+        currentNumber = '';
+        updateDisplay('');
     }
     </script>
 

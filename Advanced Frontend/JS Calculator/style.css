@@ -8,8 +8,10 @@ body {
     padding: 1em;
     background: slategray;
     height: 500px;
-    width: 400px;
+    width: 300px;
     border-radius: 5%;
+    box-shadow: -5px -5px 20px #485360 inset, 0 0 20px #263246;
+
 }
 
 .outputDisplay {
@@ -19,7 +21,7 @@ body {
     background: wheat;
 }
 
-.smallButton {
+.calcButton {
     display: inline-block;
     margin: .5em;
     font-size: 12pt;
@@ -27,17 +29,22 @@ body {
     border-radius: 4px;
     width: 3em;
     height: 3em;
-    background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 13%,rgba(130,140,149,1) 87%,rgba(40,52,59,1) 100%);
+    background: #828c95;
+    box-shadow: 5px 5px 20px rgba(183,200,200,.5) inset, 2px 2px 5px #485360;;
 }
 
-.smallButton:active {
-    background: linear-gradient(to bottom, rgba(40,52,59,1) 0%,rgba(130,140,149,1) 13%,rgba(130,140,149,1) 87%,rgba(181,189,200,1) 100%);
+
+.calcButton:active {
+    box-shadow: 5px 5px 20px #485360 inset, 2px 2px 5px rgba(183,200,200,.5);;
 }
 
 .wideButton {
-    display: inline-block;
-    margin: 1em;
-    background: darkslategray;
-    width: 8em;
-    height: 3em;
+    width: 7em;
+}
+
+.tallButton {
+    float: right;
+    position: relative;
+    right: 1em;
+    height: 7em;
 }
