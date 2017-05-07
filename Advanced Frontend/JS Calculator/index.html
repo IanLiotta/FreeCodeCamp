@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <title>FCC Calculator Project</title>
 </head>
 
@@ -32,10 +33,11 @@
         <button class="calcButton" onclick="pushNum(2)">2</button>
         <button class="calcButton" onclick="pushNum(3)">3</button>        
         <button class="calcButton tallButton" onclick="equals()">=</button>
-
-        <button class="calcButton wideButton" onclick="pushNum(0)">0</button>
-        <button class="calcButton" onclick="pushNum('.')">.</button>
-
+        
+        <div class="bottomButtons">
+            <button class="calcButton wideButton" onclick="pushNum(0)">0</button>
+            <button class="calcButton" onclick="pushNum('.')">.</button>
+        </div>
 
     </div>
 
